@@ -3,14 +3,17 @@ import sentry_sdk
 from bottle import Bottle, request
 from sentry_sdk.integrations.bottle import BottleIntegration
 
+#Достаем строку с ключом sentry из переменнных heroku
+#не забываем прописать в heroku APP_LOCATION!
 DSN = os.environ.get("DSN")
+
+#меню по умолчанию
+MENU =  "<a href=\"../success\">Успех</a><br><a href=\"../fail\">Провал</a>"
 
 sentry_sdk.init(
     dsn=DSN,
     integrations=[BottleIntegration()]
 )
-
-MENU =  "<a href=\"../success\">Успех</a><br><a href=\"../fail\">Провал</a>"
 
 
 app = Bottle()
